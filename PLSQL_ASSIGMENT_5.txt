@@ -1,0 +1,323 @@
+1)-- welcome to pl/sql block
+
+declare
+
+begin
+     dbms_output.put_line('welcome to pl/sql block:');
+
+end;
+
+
+2)--To Count Square.
+
+declare
+       cou number(10):=:cou;
+       val number(10):=cou * cou;
+
+begin
+     dbms_output.put_line('count square of '||val);
+
+end;
+
+
+3)-- Find Simple Interest
+
+declare 
+       p number(5):=10;
+       t number(5):=20;
+       r number(5):=30;
+       interest number(5);
+begin 
+     interest:=(p * t * r) /100;
+     dbms_output.put_line('interest your mark is:'||interest);
+
+end;
+
+
+4)--global and local variable
+
+declare 
+       global number(10):=100;
+ 
+begin 
+     dbms_output.put_line('global variable is:'||global);
+
+declare 
+      local varchar2(10):='hetvin';
+
+begin 
+   dbms_output.put_line('local variable is :'||local);
+
+end;
+
+end;
+
+
+
+
+5)--constant variable
+
+DECLARE 
+      NUM CONSTANT  NUMBER(10):=200;
+
+BEGIN
+     DBMS_OUTPUT.PUT_LINE('CONST VALUES:'||NUM);
+END;
+
+
+
+
+6)--IF-THEN-ELSIF-ELSE.
+
+DECLARE 
+       AGE NUMBER(10):=:AGE;
+BEGIN
+     IF(AGE > 18) THEN 
+         DBMS_OUTPUT.PUT_LINE('TICKET PRICE 200');
+     ELSIF(AGE < 10)THEN 
+         DBMS_OUTPUT.PUT_LINE('TICKET IS PRICE 100:');
+     ELSIF(AGE > 30) THEN
+         DBMS_OUTPUT.PUT_LINE('TICKTE PRICE IS 300:');
+     ELSE
+         DBMS_OUTPUT.PUT_LINE('TICKET  REGULAR PRICE IS 150:');
+     END IF;
+END;
+
+
+
+
+
+
+
+
+7)--Input three no and find out maximum and minimum from it.
+
+DECLARE 
+       A NUMBER(10):=:A;
+       B NUMBER(10):=:B;
+       C NUMBER(10):=:C;
+BEGIN
+     IF (A<B AND B>C) THEN
+               DBMS_OUTPUT.PUT_LINE('MAX='||B);
+      
+     ELSIF(B<C AND C>A) THEN 
+            DBMS_OUTPUT.PUT_LINE('MAX:='||C);
+        
+     ELSE
+            DBMS_OUTPUT.PUT_LINE('MAX:='||A);
+         
+     END IF;
+       
+       IF (A>B AND B<C) THEN
+               DBMS_OUTPUT.PUT_LINE('MIN='||B);
+      
+     ELSIF(B>C AND C<A) THEN 
+            DBMS_OUTPUT.PUT_LINE('MIN:='||C);
+        
+     ELSE
+            DBMS_OUTPUT.PUT_LINE('MIN:='||A);
+         
+     END IF;
+END ;
+
+
+
+(9)--PL/SQL Case Statement. 
+DECLARE 
+       DEPT CHAR(1):='B';
+BEGIN
+     CASE DEPT 
+           WHEN 'A' THEN
+              DBMS_OUTPUT.PUT_LINE('BCA DEPARTMENT');
+           WHEN 'B' THEN 
+              DBMS_OUTPUT.PUT_LINE('MCA DEPARTMENT');
+           WHEN 'M' THEN 
+              DBMS_OUTPUT.PUT_LINE('CA DEPARTMENT');
+     ELSE 
+         DBMS_OUTPUT.PUT_LINE('INVALID DEPARTMENT');
+     END CASE;
+END;
+      
+
+
+
+(10)-- print first 10 numbers using basic loop.. exit loop.
+DECLARE 
+       I NUMBER(3):=1;
+BEGIN
+      LOOP
+          DBMS_OUTPUT.PUT_LINE(I);
+      EXIT WHEN (I = 10);
+      I:=I+1;
+      END LOOP;
+END ;
+
+(11)-- print first 10 numbers using while loop.
+DECLARE 
+       I NUMBER(10):=1;
+
+BEGIN 
+     WHILE (I <= 10)
+     LOOP
+      DBMS_OUTPUT.PUT_LINE(I);
+     I:=I+1;
+     END LOOP;
+END;
+
+
+
+(12) print first 10 numbers using for loop.
+
+DECLARE
+BEGIN
+    FOR I IN 1..10
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(I);
+    END LOOP;
+END;
+/
+13--  print first 1 to 10 numbers in reverse using for loop --
+
+DECLARE
+BEGIN
+    FOR I IN REVERSE 1..10
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(I);
+    END LOOP;
+END;
+/
+
+14-- print first 10 prime number using while loop --
+DECLARE 
+    N NUMBER := 2; 
+    CNT NUMBER; 
+BEGIN 
+    WHILE N <= 30 LOOP 
+        CNT := 0; 
+ 
+        FOR I IN 1..N LOOP 
+            IF MOD(N, I) = 0 THEN 
+                CNT := CNT + 1; 
+            END IF; 
+        END LOOP; 
+ 
+        IF CNT = 2 THEN 
+            DBMS_OUTPUT.PUT_LINE(N); 
+        END IF; 
+ 
+        N := N + 1; 
+    END LOOP; 
+END;
+/
+
+15-- accept a string from user and display reverse of it --
+
+DECLARE
+    STR VARCHAR2(100) := '&STR';
+    REV VARCHAR2(100) := '';
+BEGIN
+    FOR I IN REVERSE 1..LENGTH(STR)
+    LOOP
+        REV := REV || SUBSTR(STR,I,1);
+    END LOOP;
+
+    DBMS_OUTPUT.PUT_LINE('Original String: ' || STR);
+    DBMS_OUTPUT.PUT_LINE('Reverse String: ' || REV);
+END;
+/
+
+
+16--  to input a string and display its Pyramid --
+DECLARE
+    STR VARCHAR2(100) := '&STR';
+BEGIN
+    FOR I IN 1..LENGTH(STR)
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(SUBSTR(STR,1,I));
+    END LOOP;
+END;
+/
+
+
+17--  to print number pyramid --
+DECLARE
+BEGIN
+    FOR I IN 1..5
+    LOOP
+        FOR J IN 1..I
+        LOOP
+            DBMS_OUTPUT.PUT(J || ' ');
+        END LOOP;
+
+        DBMS_OUTPUT.NEW_LINE;
+    END LOOP;
+END;
+/
+
+
+18--  program for the use of goto statement --
+DECLARE
+    N NUMBER := 1;
+BEGIN
+    <<hello>>
+    
+    DBMS_OUTPUT.PUT_LINE('Number = ' || N);
+    
+    N := N + 1;
+    
+    IF N <= 5 THEN
+        GOTO hello;
+    END IF;
+END;
+/
+
+
+19/* program to insert 10 row into square table. (Looping to insert
+record into specified table) */
+
+CREATE TABLE SQUARE
+(
+    NUM NUMBER,
+    SQR NUMBER
+);
+BEGIN
+    FOR I IN 1..10
+    LOOP
+        INSERT INTO SQUARE
+        VALUES(I, I*I);
+    END LOOP;
+
+    COMMIT;
+END;
+/
+SELECT * FROM SQUARE;
+
+
+20/* a program to update row of square table. ( Looping to update
+specified table.) */
+BEGIN
+    FOR I IN 1..10
+    LOOP
+        UPDATE SQUARE
+        SET SQR = I * I
+        WHERE NUM = I;
+    END LOOP;
+
+    COMMIT;
+END;
+/
+
+
+21/* program to delete row from square table. (Looping to delete
+record from specified table) */
+BEGIN
+    FOR I IN 1..10
+    LOOP
+        DELETE FROM SQUARE
+        WHERE NUM = I;
+    END LOOP;
+
+    COMMIT;
+END;
+/
+       
